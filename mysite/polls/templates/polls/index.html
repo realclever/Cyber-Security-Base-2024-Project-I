@@ -1,15 +1,31 @@
 {% load static %}
-
-<h2> Polls </h2>
-
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
-
+<h1>Polls</h1>
+{% block content %}
+{% if user.is_authenticated %}
+Hi {{ user.username }}!
+<br><br>
+<form action="{% url 'logout' %}" method="post">
+   {% csrf_token %}
+   <button type="submit">Log out</button>
+</form>
 {% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
+<ul>
+   {% for question in latest_question_list %}
+   <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+   {% endfor %}
+</ul>
 {% else %}
-    <p>No polls are available.</p>
+<p>No polls are available.</p>
 {% endif %}
+{% else %}
+<p>Log in to view the polls</p>
+<form action="{% url 'login' %}" method="post">
+   {% csrf_token %}
+   <button type="submit">Log in</button>
+</form>
+{% endif %}
+{% endblock %}
+
+
+
