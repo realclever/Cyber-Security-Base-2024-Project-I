@@ -19,11 +19,16 @@ Hi {{ user.username }}!
 <p>No polls are available.</p>
 {% endif %}
 {% else %}
-<p>Log in to view the polls</p>
+<p>Register or log in to view the polls</p>
 <form action="{% url 'login' %}" method="post">
    {% csrf_token %}
    <button type="submit">Log in</button>
 </form>
+<form action="{% url 'polls:signup' %}" method="post">
+   {% csrf_token %}
+   <button type="submit">Sign up</button>
+</form>
+
 {% endif %}
 {% endblock %}
 
