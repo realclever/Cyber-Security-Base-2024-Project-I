@@ -27,7 +27,9 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='/polls/login/')
+# redirect to login page if user is not logged in and is trying to vote
+# additional fix added to templates/polls/detail.html which prevents non authenticated users from seeing the page
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
