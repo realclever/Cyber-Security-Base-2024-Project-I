@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles'
+    'django.contrib.staticfiles',
+    'django_admin_logs'
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+# Allows super users/staff users to remove entries withing the admin interface default value = True
+# DJANGO_ADMIN_LOGS_DELETABLE = False
+
+# Disables admin log entries default value = False
+# DJANGO_ADMIN_LOGS_ENABLED = True
+
+# Ignores log entries with the message “No fields changed” default value = False
+# DJANGO_ADMIN_LOGS_IGNORE_UNCHANGED = True
