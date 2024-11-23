@@ -1,4 +1,8 @@
+## Cyber Security Base 2024 course Project I
+
 ## Project description 
+
+This project is a simple implementation of the [Django starter website](https://docs.djangoproject.com/en/5.1/intro/tutorial01/). The application includes Django’s built-in registration for new users and a few other QOL improvements. Only admins can create polls and authenticated users can view and vote them. The application has five security flaws from the OWASP 2021 Top Ten list. This applications sole purpose is to demonstrate security flaws and shouldn’t be used for other purposes. 
 
 ## Installing project
 
