@@ -28,10 +28,20 @@ SECRET_KEY = 'django-insecure-q7h6n-l*wr4as%(^el-z1c@3t4onvc51(u1=i7(-zgnj=c0h^f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 # DEBUG = config('DEBUG')
+# values stored in .env
 
-# ALLOWED_HOSTS if DEBUG is false
+# ALLOWED_HOSTS if DEBUG = false
 # ALLOWED_HOSTS =  ['localhost', '127.0.0.1']
 ALLOWED_HOSTS = []
+
+# Allows super users/staff users to remove entries withing the admin interface default value = True
+# DJANGO_ADMIN_LOGS_DELETABLE = False
+
+# Enables admin log entries default value = False - set True to view logs
+DJANGO_ADMIN_LOGS_ENABLED = True
+
+# Ignores log entries with the message “No fields changed” default value = False
+# DJANGO_ADMIN_LOGS_IGNORE_UNCHANGED = True
 
 # Application definition
 
@@ -43,7 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_admin_logs',
+    'django_admin_logs',   
     'user_visit'
 ]
 
@@ -134,11 +144,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-# Allows super users/staff users to remove entries withing the admin interface default value = True
-# DJANGO_ADMIN_LOGS_DELETABLE = False
-
-# Enables admin log entries default value = False - set True to view logs
-DJANGO_ADMIN_LOGS_ENABLED = False
-
-# Ignores log entries with the message “No fields changed” default value = False
-# DJANGO_ADMIN_LOGS_IGNORE_UNCHANGED = True
