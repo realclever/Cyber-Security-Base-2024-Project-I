@@ -45,6 +45,7 @@ DJANGO_ADMIN_LOGS_ENABLED = True
 
 # Application definition
 
+#added admin_logs, user_visit and axes
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'django.contrib.admin',
@@ -58,6 +59,7 @@ INSTALLED_APPS = [
     'axes'
 ]
 
+#added user_visit and axes middlewares
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -101,6 +103,7 @@ DATABASES = {
     }
 }
 
+#authentication backends for axes 
 AUTHENTICATION_BACKENDS = [
     'axes.backends.AxesStandaloneBackend',
     'django.contrib.auth.backends.ModelBackend'
