@@ -45,6 +45,18 @@ DJANGO_ADMIN_LOGS_ENABLED = True
 
 # Application definition
 
+# Axes configuration
+
+# AXES_FAILURE_LIMIT: 5
+# number of login attempts that will be allowed before a user is locked out of your application 
+
+# AXES_COOLOFF_TIME: 1
+# This dictates how long you will have to wait before you can try logging into your website again. Integers are represented by hours and there is no default value set.
+
+# AXES_RESET_ON_SUCCESS = True 
+# If the axes-failure-limit is set to 3 failed attempts and the user logs in successfully after 2 failed attempts, we would like to reset his failed attempts to 0
+
+
 #added admin_logs, user_visit and axes
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
@@ -62,12 +74,13 @@ INSTALLED_APPS = [
 #added user_visit and axes middlewares
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # This module should be listed after the django.middleware.security.SecurityMiddleware module as ordering is important
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'user_visit.middleware.UserVisitMiddleware',
     'axes.middleware.AxesMiddleware'
 ]
