@@ -47,13 +47,13 @@ DJANGO_ADMIN_LOGS_ENABLED = True
 
 # Axes configuration
 
-# AXES_FAILURE_LIMIT: 5
+AXES_FAILURE_LIMIT: 5
 # number of login attempts that will be allowed before a user is locked out of your application 
 
-# AXES_COOLOFF_TIME: 1
+AXES_COOLOFF_TIME: 1
 # This dictates how long you will have to wait before you can try logging into your website again. Integers are represented by hours and there is no default value set.
 
-# AXES_RESET_ON_SUCCESS = True 
+AXES_RESET_ON_SUCCESS = True 
 # If the axes-failure-limit is set to 3 failed attempts and the user logs in successfully after 2 failed attempts, we would like to reset his failed attempts to 0
 
 
@@ -68,7 +68,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_admin_logs',   
     'user_visit',
-    'axes'
+    'axes',
+    'csp'
 ]
 
 #added user_visit and axes middlewares
@@ -76,12 +77,16 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # This module should be listed after the django.middleware.security.SecurityMiddleware module as ordering is important
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # CSP middleware
+    'csp.middleware.CSPMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # user-visit middleware
     'django.contrib.messages.middleware.MessageMiddleware',
     'user_visit.middleware.UserVisitMiddleware',
+    # axes middleware
     'axes.middleware.AxesMiddleware'
 ]
 
@@ -152,7 +157,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -166,3 +170,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
+# Content Security Policy headers settings
+
+# fallback for other types of content (scripts, images, styles).
+# CSP_DEFAULT_SRC = ("'self'",)
+
+# Specifies valid sources for * 
+# CSP_STYLE_SRC = ("'self'",)
+#CSP_SCRIPT_SRC = ("'self'",)
+# CSP_IMG_SRC = ("'self'",)
+# CSP_FONT_SRC = ("'self'",)

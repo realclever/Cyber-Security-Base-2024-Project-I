@@ -32,7 +32,16 @@ The vulnerability lies in URL manipulation. For example, navigating to a URL suc
 
 However, while the user may still be able to access the URL, a more robust solution involves adding user authentication checks in the template. For instance, in the ```polls/detail.html``` file, you can include the condition ```{% if user.is_authenticated %}```. If the user is not authenticated, they cannot access the URL, and an error message will be displayed.
 
-### FLAW 3: A05:2021 - Security Misconfiguration
+### FLAW 3: A03:2021 - Injection
+
+n XSS attacks, an attacker injects malicious scripts into web pages viewed by other users. These scripts can execute various actions, such as stealing cookies, session tokens, or performing actions on behalf of the user. Although Django is widely recognized as a secure framework with built-in security measures against most common vulnerabilities, preventing XSS attacks is always tricky, and a more layered defense is always better.
+Content Security Policy (CSP) adds an extra layer of defense by helping to prevent XSS and data injection attacks by controlling what content is allowed to load on a website.
+
+Settings (line 173)
+
+Installing and configuring CSP was fairly straightforward. I went with the most basic configuration that only allows sources from the same origin as the page (CSP_DEFAULT_SRC = ("'self'",)) and applied the same setting for styles, scripts, images, and fonts. These are the most basic settings and can be tailored for the needs of any site and the protection level you want to achieve. After doing more research on CSP, I learned that it is so robust that Django is considering making it a built-in feature in the future.#
+
+### FLAW 4: A05:2021 - Security Misconfiguration
 
 Security misconfiguration is one of the most common vulnerabilities. Critical settings such as ```SECRET_KEY``` and ```DEBUG``` should be properly managed to prevent security risks.
 
@@ -47,7 +56,7 @@ Security misconfiguration is one of the most common vulnerabilities. Critical se
 To simplify managing these settings, I used the ```Python-decouple``` library. This library allows you to store critical configuration values in a separate file, ensuring they remain confidential. Many developers are familiar with the ```Python-dotenv``` library, which reads key-value pairs from a ```.env``` file and sets them as environment variables. I adopted a similar approach here using Decouple. Storing the ```SECRET_KEY``` and the ```DEBUG``` setting in a ```.env``` file, rather than directly in ```settings.py```, is considered good practice.
 
 
-### FLAW 4: A09:2021 - Security Logging and Monitoring Failures
+### FLAW 5: A09:2021 - Security Logging and Monitoring Failures
 
 Security logging and monitoring failures are described as "vulnerabilities that occur when a system or application fails to log or monitor security events properly. This can allow attackers to gain unauthorized access to systems and data without detection." In this application, by default, admins or unauthorized users can perform any action without leaving traces, such as manipulating data or attempting to hack the system.
 
