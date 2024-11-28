@@ -34,6 +34,8 @@ DEBUG = True
 # ALLOWED_HOSTS =  ['localhost', '127.0.0.1']
 ALLOWED_HOSTS = []
 
+# Admin-logs configuration
+
 # Allows super users/staff users to remove entries withing the admin interface default value = True
 # DJANGO_ADMIN_LOGS_DELETABLE = False
 
@@ -43,7 +45,7 @@ DJANGO_ADMIN_LOGS_ENABLED = True
 # Ignores log entries with the message “No fields changed” default value = False
 # DJANGO_ADMIN_LOGS_IGNORE_UNCHANGED = True
 
-# Application definition
+
 
 # Axes configuration
 
@@ -56,8 +58,8 @@ AXES_COOLOFF_TIME: 1
 AXES_RESET_ON_SUCCESS = True 
 # If the axes-failure-limit is set to 3 failed attempts and the user logs in successfully after 2 failed attempts, we would like to reset his failed attempts to 0
 
+# Application definition
 
-#added admin_logs, user_visit and axes
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'django.contrib.admin',
@@ -72,7 +74,6 @@ INSTALLED_APPS = [
     'csp'
 ]
 
-#added user_visit and axes middlewares
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # This module should be listed after the django.middleware.security.SecurityMiddleware module as ordering is important
@@ -145,7 +146,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -177,6 +177,6 @@ LOGOUT_REDIRECT_URL = "/"
 
 # Specifies valid sources for * 
 # CSP_STYLE_SRC = ("'self'",)
-#CSP_SCRIPT_SRC = ("'self'",)
+# CSP_SCRIPT_SRC = ("'self'",)
 # CSP_IMG_SRC = ("'self'",)
 # CSP_FONT_SRC = ("'self'",)
