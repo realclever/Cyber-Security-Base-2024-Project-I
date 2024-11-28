@@ -45,8 +45,6 @@ DJANGO_ADMIN_LOGS_ENABLED = True
 # Ignores log entries with the message “No fields changed” default value = False
 # DJANGO_ADMIN_LOGS_IGNORE_UNCHANGED = True
 
-
-
 # Axes configuration
 
 AXES_FAILURE_LIMIT: 5
