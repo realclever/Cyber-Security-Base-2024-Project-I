@@ -1,14 +1,15 @@
+{% load static %}
 <h1>{{ question.question_text }}</h1>
 <ul>
-   {% for choice in question.choice_set.all %}
-   <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-   {% endfor %}
+    {% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+    {% endfor %}
 </ul>
 <form action="{% url 'polls:detail' question.id %}">
-   {% csrf_token %}
-   <input type="submit" value="Vote again?" />
+    {% csrf_token %}
+    <input type="submit" value="Vote again?" />
 </form>
 <form action="{% url 'polls:index' %}">
-   {% csrf_token %}
-   <input type="submit" value="Return to polls" />
+    {% csrf_token %}
+    <input type="submit" value="Return to polls" />
 </form>

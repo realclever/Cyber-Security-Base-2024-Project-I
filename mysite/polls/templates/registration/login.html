@@ -1,13 +1,11 @@
 {% block content %}
 <h2>Log In</h2>
 <form method="post">
-  {% csrf_token %}
-  {{ form }}
-  <button type="submit">Log In</button>
+    {% csrf_token %} {{ form }}
+    <button type="submit">Log In</button>
 </form>
 <form action="{% url 'polls:index' %}">
-  {% csrf_token %}
+    {% csrf_token %}
     <input type="submit" value="Return to polls" />
 </form>
 {% endblock %}
-

@@ -5,20 +5,19 @@
 {% endif %}
 
 <form action="{% url 'polls:vote' question.id %}" method="post">
-   <!-- {% csrf_token %} -->
-   {% for choice in question.choice_set.all %}
-   <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-   <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
-   {% endfor %}
-   <input type="submit" value="Vote">
+    {% csrf_token %} {% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+    {% endfor %}
+    <input type="submit" value="Vote" />
 </form>
 <form action="{% url 'polls:index' %}">
-   <!-- {% csrf_token %} -->
-   <input type="submit" value="Return to polls" />
+    {% csrf_token %}
+    <input type="submit" value="Return to polls" />
 </form>
 
 <!-- code including fix for URL manipulation -->
- 
+
 <!-- {% if user.is_authenticated %}
 <h1>{{ question.question_text }}</h1>
 {% if error_message %}
