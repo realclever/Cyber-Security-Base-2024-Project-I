@@ -54,7 +54,7 @@ AXES_COOLOFF_TIME: 1
 # This dictates how long you will have to wait before you can try logging into your website again. Integers are represented by hours and there is no default value set.
 
 AXES_RESET_ON_SUCCESS = True 
-# If the axes-failure-limit is set to 3 failed attempts and the user logs in successfully after 2 failed attempts, we would like to reset his failed attempts to 0
+# If the AXES_FAILURE_LIMI is set to 5 failed attempts and the user logs in successfully after 4 failed attempts, this resets failed attempts to 0
 
 # Application definition
 
