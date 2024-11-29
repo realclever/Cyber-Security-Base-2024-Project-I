@@ -5,7 +5,6 @@
     <button type="submit">Log In</button>
 </form>
 <form action="{% url 'polls:index' %}">
-    {% csrf_token %}
     <input type="submit" value="Return to polls" />
 </form>
 {% endblock %}
