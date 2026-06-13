@@ -21,14 +21,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
+# FLAW 4: Security Misconfiguration
+# The secret key is hardcoded instead of being stored securely
 SECRET_KEY = 'django-insecure-q7h6n-l*wr4as%(^el-z1c@3t4onvc51(u1=i7(-zgnj=c0h^f'
+# FIX: Store the secret key in .env file or use environment variables
 # SECRET_KEY = config('SECRET_KEY')
-# values stored in .env
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# FLAW 4: Security Misconfiguration
+# Debug mode is enabled
 DEBUG = True
-# DEBUG = config('DEBUG')
-# values stored in .env
+# FIX: Disable debug mode in production and read the value from configuration
+# DEBUG = config('DEBUG', cast=bool, default=False)
 
 # ALLOWED_HOSTS if DEBUG = false
 # ALLOWED_HOSTS =  ['localhost', '127.0.0.1']
@@ -36,25 +41,28 @@ ALLOWED_HOSTS = []
 
 # Admin-logs configuration
 
-# Allows super users/staff users to remove entries withing the admin interface default value = True
 # DJANGO_ADMIN_LOGS_DELETABLE = False
 
-# Enables admin log entries default value = False - set True to view logs
-DJANGO_ADMIN_LOGS_ENABLED = True
+# FLAW 5: Admin action logging is disabled
+# FIX: Enable django-admin-logs
+# DJANGO_ADMIN_LOGS_ENABLED = True
 
 # Ignores log entries with the message “No fields changed” default value = False
 # DJANGO_ADMIN_LOGS_IGNORE_UNCHANGED = True
 
 # Axes configuration
 
-AXES_FAILURE_LIMIT: 5
-# number of login attempts that will be allowed before a user is locked out of your application 
+# FLAW 5: Login attempt limits are disabled
+# FIX: Configure django-axes login attempt limits
 
-AXES_COOLOFF_TIME: 1
-# This dictates how long you will have to wait before you can try logging into your website again. Integers are represented by hours and there is no default value set.
+# AXES_FAILURE_LIMIT = 3
+# Number of failed login attempts allowed before a user is locked out
 
-AXES_RESET_ON_SUCCESS = True 
-# If the AXES_FAILURE_LIMI is set to 5 failed attempts and the user logs in successfully after 4 failed attempts, this resets failed attempts to 0
+# AXES_COOLOFF_TIME = 1
+# Number of hours the user has to wait before trying to log in again
+
+# AXES_RESET_ON_SUCCESS = True
+# Resets failed login attempts to 0 after a successful login
 
 # Application definition
 
@@ -66,27 +74,44 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_admin_logs',   
-    'user_visit',
-    'axes',
-    'csp'
+
+    # FLAW 5: Security logging and monitoring packages are disabled
+    # FIX: Enable these to log admin actions, user visits and suspicious login attempts
+    # 'django_admin_logs',
+    # 'user_visit',
+    # 'axes',
+
+    # FLAW 3: Content Security Policy is disabled
+    # FIX: Enable CSP as an additional defense against XSS and other injection attacks
+    # 'csp',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # This module should be listed after the django.middleware.security.SecurityMiddleware module as ordering is important
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # CSP middleware
-    'csp.middleware.CSPMiddleware',
+    
+    # FLAW 3: CSP middleware is disabled
+    # FIX: Enable CSP middleware as an additional defense against XSS and other injection attacks
+    # 'csp.middleware.CSPMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+
+    # FLAW 1: CSRF protection is disabled only for the vote view
+    # FIX: Remove csrf_exempt from the vote view and add csrf_token to the POST form
     'django.middleware.csrf.CsrfViewMiddleware',
+    
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # user-visit middleware
     'django.contrib.messages.middleware.MessageMiddleware',
-    'user_visit.middleware.UserVisitMiddleware',
-    # axes middleware
-    'axes.middleware.AxesMiddleware'
+
+    # FLAW 5: User visit logging is disabled
+    # FIX: Enable user visit middleware
+    # 'user_visit.middleware.UserVisitMiddleware',
+
+    # FLAW 5: Login attempt monitoring is disabled
+    # FIX: Enable django-axes middleware
+    # 'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -120,11 +145,12 @@ DATABASES = {
     }
 }
 
-#authentication backends for axes 
-AUTHENTICATION_BACKENDS = [
-    'axes.backends.AxesStandaloneBackend',
-    'django.contrib.auth.backends.ModelBackend'
-]
+# FLAW 5: Login attempt monitoring is disabled
+# FIX: Enable django-axes authentication backend
+# AUTHENTICATION_BACKENDS = [
+#     'axes.backends.AxesStandaloneBackend',
+#     'django.contrib.auth.backends.ModelBackend'
+# ]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

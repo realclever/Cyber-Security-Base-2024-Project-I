@@ -1,0 +1,4 @@
+mysite/db.sqlite3
+__pycache__/
+mysite/.env
+.DS_Store

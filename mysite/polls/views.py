@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Choice, Question
 
@@ -27,9 +28,16 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
+# FLAW 2: Broken Access Control
+# The vote view is accessible without authentication
+# This allows unauthenticated users to submit votes
+#
+# FIX: Require authentication before allowing users to vote
 # @login_required(login_url='/polls/login/')
-# redirect to login page if user is not logged in and is trying to vote
-# additional fix added to templates/polls/detail.html which prevents non authenticated users from seeing the page
+
+# FLAW 1: CSRF protection is intentionally disabled for the vote view
+# FIX: Remove csrf_exempt and add csrf_token to the POST form
+@csrf_exempt
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
