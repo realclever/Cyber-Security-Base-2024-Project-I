@@ -40,10 +40,9 @@ python3 manage.py runserver
 
 Users
 
-```Username: admin pw: adminpassword```
+```Username: admin password: adminpassword```
 
-```Username: user pw: userpassword```
-
+```Username: user password: userpassword```
 
 ## Flaws
 
