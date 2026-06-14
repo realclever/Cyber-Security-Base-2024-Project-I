@@ -2,44 +2,48 @@
 
 ## Project description 
 
-This project is a simple implementation of the [Django starter website](https://docs.djangoproject.com/en/5.1/intro/tutorial01/). The application includes Django’s built-in registration for new users and few other QOL improvements main focus being on finding and patching up security issues rather than building and polishing the application itself.
+This project is a simple implementation of the [Django starter website](https://docs.djangoproject.com/en/5.1/intro/tutorial01/). The application includes Django’s built-in registration for new users and a few other QoL improvements. The main focus is on finding and patching security issues rather than building and polishing the application itself.
 
-  The application has five security flaws from the OWASP 2021 Top Ten list. This applications sole purpose is to demonstrate security flaws and shouldn’t be used for other purposes. 
+The application has five security flaws from the OWASP 2021 Top Ten list. This application’s sole purpose is to demonstrate security flaws and it should not be used for other purposes.
 
-
-## Installing project
+## Installation
 
 Clone the project
 
 ```
 git clone https://github.com/realclever/Cyber-Security-Base-2024-Project-I.git
 ```
+
+Move to the project folder
+
+```
+cd Cyber-Security-Base-2024-Project-I/mysite
+```
+
 Install requirements
 
 ```
-pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 
-Make migrations
+Apply migrations
 
 ```
-python manage.py makemigrations
-python manage.py migrate
+python3 manage.py migrate
 ```
 
 Start project
 
 ```
-python manage.py runserver
+python3 manage.py runserver
 ```
 
 Users
 
-```Username: admin pw: catcatcat```
+```Username: admin pw: adminpassword```
 
-```Username: user pw: dogdogdog```
+```Username: user pw: userpassword```
 
-Note: only admins can create polls and authenticated users can view and vote them.
 
 ## Flaws
 
